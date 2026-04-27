@@ -377,7 +377,7 @@ class CyberGoose:
     def _clone_loop(self):
         time.sleep(15)
         while True:
-            time.sleep(random.randint(40))
+            time.sleep(random.randint(20, 40))
             self.root.after(0, self._spawn_clone)
 
     def _spawn_clone(self):
