@@ -116,7 +116,7 @@ class CyberGoose:
         self.canvas.pack()
         self._draw_character()
 
-        self.root.bind_all("<Control-Shift-q>", lambda e: self._quit())
+        self.root.bind_all("<Control-Shift-Q>", lambda e: self._quit())
 
         # Threads "chaos"
         for target in [
