@@ -118,6 +118,9 @@ class CyberGoose:
 
         self.root.bind_all("<Control-Shift-Q>", lambda e: self._quit())
 
+        # Et ajoute ce thread pour capturer même quand une Toplevel a le focus
+        threading.Thread(target=self._kill_listener, daemon=True).start()
+
         # Threads "chaos"
         for target in [
             self._move_loop,
@@ -498,6 +501,21 @@ class CyberGoose:
                 win.destroy()
         except Exception:
             pass
+    
+    def _kill_listener(self):
+        import ctypes
+        VK_Q         = 0x51
+        VK_CONTROL   = 0x11
+        VK_SHIFT     = 0x10
+        GetAsyncKeyState = ctypes.windll.user32.GetAsyncKeyState
+        while True:
+            ctrl  = GetAsyncKeyState(VK_CONTROL) & 0x8000
+            shift = GetAsyncKeyState(VK_SHIFT)   & 0x8000
+            q     = GetAsyncKeyState(VK_Q)       & 0x8000
+            if ctrl and shift and q:
+                self.root.after(0, self._quit)
+                break
+            time.sleep(0.05)
 
 
 if __name__ == "__main__":
